@@ -1,20 +1,16 @@
-var socket = io();
+import { Elm } from "/elm.js"
 
-var messages = document.getElementById('messages');
-var form = document.getElementById('form');
-var input = document.getElementById('input');
+function main() {
+  const app = Elm.Main.init({
+    node: document.getElementById('elm')
+  });
+  const socket = io();
+  app.ports.sendMessage.subscribe(function(message) {
+    socket.emit('chat message', message);
+  });
+  socket.on('chat message', function(message) {
+    app.ports.receiveMessage.send(message);
+  });
+}
 
-form.addEventListener('submit', function(e) {
-  e.preventDefault();
-  if (input.value) {
-    socket.emit('chat message', input.value);
-    input.value = '';
-  }
-});
-
-socket.on('chat message', function(msg) {
-  var item = document.createElement('li');
-  item.textContent = msg;
-  messages.appendChild(item);
-  window.scrollTo(0, document.body.scrollHeight);
-});
+document.addEventListener("DOMContentLoaded", main);

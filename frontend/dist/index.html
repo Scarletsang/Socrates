@@ -4,12 +4,10 @@
     <title>Socket.IO chat</title>
     <link rel="stylesheet" href="/styles.css">
     <script src="/socket.io/socket.io.js" defer></script>
-    <script src="/js/index.html" defer></script>
+    <script src="elm.js" type="module"></script>
+    <script src="bundle.js" type="module"></script>
   </head>
   <body>
-    <ul id="messages"></ul>
-    <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
-    </form>
+    <div id="elm"></div>
   </body>
 </html>
