@@ -1,0 +1,5 @@
+services:
+  socrates_v1:
+    build: .
+    ports:
+      - "3000:3000"
